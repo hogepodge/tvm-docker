@@ -62,3 +62,4 @@ RUN cd ~/tvm/docs\
 WORKDIR /home/tvm
 RUN cd \
  && echo "export PATH=$PATH:/home/tvm/.local/bin" >> .bashrc
+RUN echo "source .setup" >> .bashrc
