@@ -1,0 +1,5 @@
+git config --global user.name \"$GIT_USERNAME\"
+git config --global user.email \"$GIT_EMAIL\"
+cd tvm
+git remote add working git@github.com:$GITHUB_USERNAME/tvm.git
+cd

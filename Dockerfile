@@ -58,8 +58,7 @@ RUN cd ~/tvm/python \
 RUN cd ~/tvm/docs\
  && TVM_TUTORIAL_EXEC_PATTERN=none make html
 
-# Add the new local path and set entrypoint home
+# Set up the working space
 WORKDIR /home/tvm
 RUN cd \
  && echo "export PATH=$PATH:/home/tvm/.local/bin" >> .bashrc
-
