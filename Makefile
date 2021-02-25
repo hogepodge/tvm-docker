@@ -34,6 +34,12 @@ sphinx-serve:
 
 stop:
 	docker stop tvm_devel
+
+start:
+	docker start tvm_devel
+
+clean:
+	docker stop tvm_devel
 	docker rm tvm_devel
 
 rm:
