@@ -8,7 +8,7 @@ configuration.
 Once the container is built, you can then launch it as a development environment
 by executing `make run`. This will launch the container and put it into an
 infinite loop. It will also mount your `~/.ssh` directory read-only for key
-access, and will set your Gitb variables based on your system settings.
+access, and will set your git variables based on your system settings.
 Optionally you can export your GitHub username as `GITHUB_USERNAME` to set
 a remote branch in the TVM repository to push work to.
 
