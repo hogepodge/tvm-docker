@@ -7,7 +7,8 @@ ENV THREADS=8
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Bring the image up to date
-RUN apt update -y \
+RUN apt-get dist-upgrade -y \
+ && apt update -y \
  && apt upgrade -y
 
 # Install dependencies
@@ -25,6 +26,7 @@ RUN apt install -y \
         libxml2-dev \
         llvm \
         git \
+        sudo \
         vim
 
 # Install Python dependencies
@@ -32,8 +34,10 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 # Create the tvm user
-RUN groupadd -r tvm -g 3604 && \
-    useradd -u 3604 -r -g tvm -m -c "TVM user" tvm
+RUN groupadd -r tvm -g 3604 \
+ && useradd -u 3604 -r -g tvm -m -c "TVM user" tvm \
+ && usermod -aG sudo tvm \
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER tvm
 

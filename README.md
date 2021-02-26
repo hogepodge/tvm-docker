@@ -20,3 +20,10 @@ with `make start`. If you are done working with a container, you can run
 `make clean` which will stop and remove the container. Note that this is a
 destructive act, any work you have running in the environment will be lost as
 the container is stopped and removed.
+
+## Big Caveat!
+
+The environment is intended for development only. Things like password-less
+`sudo` and mounting of your private ssh keys make it entirely unsuitable for
+production. If you try to run this on a publicly available system you are just
+asking for trouble so don't do that. Local development only!
