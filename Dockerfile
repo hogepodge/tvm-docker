@@ -35,7 +35,7 @@ RUN pip3 install -r requirements.txt
 
 # Create the tvm user
 RUN groupadd -r tvm -g 3604 \
- && useradd -u 3604 -r -g tvm -m -c "TVM user" tvm \
+ && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm \
  && usermod -aG sudo tvm \
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 

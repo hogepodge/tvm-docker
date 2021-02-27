@@ -11,6 +11,7 @@ run:
 	docker run \
 		-v $(HOME)/.ssh:/home/tvm/.ssh:ro \
 		-v $(CURDIR)/setup:/home/tvm/.setup:ro \
+		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-e GIT_USERNAME \
         -e GIT_EMAIL \
 		-e GITHUB_USERNAME \
