@@ -43,6 +43,9 @@ clean:
 	docker stop tvm_devel
 	docker rm tvm_devel
 
+imageclean:
+	docker image rm tvm-devel
+
 rm:
 	docker rm $$(docker ps -a -q)
 
