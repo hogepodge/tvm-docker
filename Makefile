@@ -21,6 +21,11 @@ run:
 		tvm-devel \
 		sleep infinity
 
+docs:
+	docker exec \
+		tvm_devel \
+		bash -c "cd tvm/docs; TVM_TUTORIAL_EXEC_PATTERN=/vta/tutorials make html"
+
 shell:
 	docker exec \
 		-it \
