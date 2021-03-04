@@ -29,6 +29,7 @@ docs:
 shell:
 	docker exec \
 		-it \
+		-e GITHUB_USERNAME \
 		tvm_devel \
 		bash
 
