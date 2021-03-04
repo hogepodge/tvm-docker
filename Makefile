@@ -24,6 +24,7 @@ run:
 shell:
 	docker exec \
 		-it \
+		-e GITHUB_USERNAME \
 		tvm_devel \
 		bash
 
@@ -32,6 +33,16 @@ sphinx-serve:
 		-d \
 		tvm_devel \
 		bash -c "cd tvm/docs ; sphinx-serve"
+
+docs:
+	docker exec \
+ 		tvm_devel \
+ 		bash -c "cd tvm/docs; TVM_TUTORIAL_EXEC_PATTERN=/vta/tutorials make html"
+
+tvm:
+	docker exec \
+		tvm_devel \
+		bash -c "cd tvm/build; make -j 8"
 
 stop:
 	docker stop tvm_devel
