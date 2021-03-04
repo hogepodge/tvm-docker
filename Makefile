@@ -3,7 +3,6 @@ SHELL := /bin/bash
 tvm-devel:
 	docker build \
 		-t tvm-devel \
-		.
 
 run:
 	GIT_USERNAME="$(shell git config user.name)" \
@@ -20,11 +19,6 @@ run:
 		--name tvm_devel \
 		tvm-devel \
 		sleep infinity
-
-docs:
-	docker exec \
-		tvm_devel \
-		bash -c "cd tvm/docs; TVM_TUTORIAL_EXEC_PATTERN=/vta/tutorials make html"
 
 shell:
 	docker exec \
