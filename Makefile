@@ -3,6 +3,7 @@ SHELL := /bin/bash
 tvm-devel:
 	docker build \
 		-t tvm-devel \
+		.
 
 run:
 	GIT_USERNAME="$(shell git config user.name)" \
