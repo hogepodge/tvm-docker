@@ -41,6 +41,8 @@ RUN groupadd -r tvm -g 3604 \
 
 USER tvm
 
+COPY config_cmake.sh /home/tvm/config_cmake.sh
+
 # Get TVM from GitHub and build
 RUN cd \
  && git clone --recursive https://github.com/apache/tvm tvm \
@@ -50,6 +52,7 @@ RUN cd \
  && mkdir build \
  && cp $CONFIG_CMAKE build/config.cmake \
  && cd build \
+ && ~/config_cmake.sh \
  && cmake ../. \
  && make -j $THREADS
 

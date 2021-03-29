@@ -5,6 +5,12 @@ tvm-devel:
 		-t tvm-devel \
 		.
 
+nocache:
+	docker build \
+		-t tvm-devel \
+		--no-cache \
+		.
+
 run:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \
