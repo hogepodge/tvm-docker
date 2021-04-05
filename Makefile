@@ -1,11 +1,23 @@
 SHELL := /bin/bash
 
-tvm-devel:
+tvm-devel: tvm-deps
 	docker build \
 		-t tvm-devel \
 		.
+tvm-deps: Dockerfile.deps
+	docker build \
+		-t tvm-deps \
+		-f Dockerfile.deps \
+		.
 
-nocache:
+deps-nocache:
+	docker build \
+		-t tvm-deps \
+		--no-cache \
+		-f Dockerfile.deps \
+		.
+
+devel-nocache:
 	docker build \
 		-t tvm-devel \
 		--no-cache \

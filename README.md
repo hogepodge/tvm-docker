@@ -1,9 +1,9 @@
 # README.md for TVM-Docker
 
 This set of Dockerfile and Makefile allows for quickly standing up and working
-in a development environment for TVM. To get started, you can run `make build`
-to download dependencies, download TVM, and build TVM with a standard
-configuration.
+in a development environment for TVM. To get started, you can run
+`make tvm-devel` to download dependencies, download TVM, and build TVM with a
+standard configuration.
 
 Once the container is built, you can then launch it as a development environment
 by executing `make run`. This will launch the container and put it into an
