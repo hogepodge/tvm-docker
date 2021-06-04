@@ -38,7 +38,7 @@ cloudpickle
 synr
 sphinx
 sphinx-gallery==0.4.0
-autodocsumm<0.2.0
+autodocsumm
 sphinx_rtd_theme
 sphinx_autodoc_annotation
 sphinx-serve

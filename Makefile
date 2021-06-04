@@ -4,6 +4,7 @@ tvm-devel: tvm-deps
 	docker build \
 		-t tvm-devel \
 		.
+
 tvm-deps: Dockerfile.deps
 	docker build \
 		-t tvm-deps \
