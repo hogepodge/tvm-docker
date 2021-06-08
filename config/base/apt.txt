@@ -12,13 +12,10 @@ build-essential
 
 # required to build tvm
 cmake
+git
 libedit-dev
 libxml2-dev
 llvm
 
-# development tools
-git
-vim
-
-# optionally make the tvm user sudo
+# make the tvm user sudo
 sudo
