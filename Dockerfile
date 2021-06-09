@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
 # The pipeline is a colon separated ordered list
-ARG CONFIG_PIPELINE=base:devel
-ARG BUILD_PIPELINE=build:python:docs
+ARG CONFIG_PIPELINE=base:static:devel
+ARG BUILD_PIPELINE=tvm:python:wheels:docs
 
 USER root
 

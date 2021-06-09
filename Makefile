@@ -3,11 +3,13 @@ SHELL := /bin/bash
 tvm-devel:
 	docker build \
 		-t tvm-devel \
+		--progress=plain \
 		.
 
 devel-nocache:
 	docker build \
 		-t tvm-devel \
+		--progress=plain \
 		--no-cache \
 		.
 
@@ -16,7 +18,6 @@ run:
 	GIT_EMAIL="$(shell git config user.email)" \
 	docker run \
 		-v $(HOME)/.ssh:/home/tvm/.ssh:ro \
-		-v $(CURDIR)/setup:/home/tvm/.setup:ro \
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-e GIT_USERNAME \
         -e GIT_EMAIL \
@@ -26,6 +27,8 @@ run:
 		--name tvm_devel \
 		tvm-devel \
 		sleep infinity
+
+#		-v $(CURDIR)/setup:/home/tvm/.setup:ro \
 
 shell:
 	docker exec \

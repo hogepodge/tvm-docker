@@ -5,18 +5,22 @@
 # pass a list of subdirectories to process
 set -x
 
-IFS=":" read -a pipeline <<< $1
+readarray -td: pipeline <<< $1; declare -p pipeline
 
 cd build
 
-for package in $pipeline ; do
+for package in ${pipeline[@]} ; do
     if test -d $package; then
-        # run the custom script
+        echo "Building $package"
+        cd $package
+
         if test -f build.sh ; then
             ./build.sh
         else
             echo "No build.sh script for $package, skipping custom script."
         fi
+
+        cd ..
     else
         echo "Missing configuration directory $package."
     fi

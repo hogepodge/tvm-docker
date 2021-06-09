@@ -4,14 +4,15 @@
 # pass a list of subdirectories to process
 set -x
 
-IFS=":" read -a pipeline <<< $1
-
+readarray -td: pipeline <<< $1; declare -p pipeline
+ 
 cd config
 
 echo $pipeline
 
-for package in $pipeline ; do
+for package in ${pipeline[@]} ; do
     if test -d $package; then
+        echo "Configuring $package"
         cd $package
 
         # install system dependencies
@@ -42,6 +43,8 @@ for package in $pipeline ; do
         else
             echo "No custom.sh script for $package, skipping custom script."
         fi
+
+        cd ..
     else
         echo "Missing configuration directory $package."
     fi
