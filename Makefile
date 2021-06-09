@@ -13,6 +13,13 @@ devel-nocache:
 		--no-cache \
 		.
 
+minimal:
+	docker build \
+		-t tvm-minimal \
+		--progress=plain \
+		-f Dockerfile.minimal \
+		.
+
 run:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \

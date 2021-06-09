@@ -1,0 +1,19 @@
+FROM tvm-devel
+
+FROM ubuntu
+RUN apt-get dist-upgrade -y \
+ && apt update -y \
+ && apt upgrade -y \
+ && apt install -y python3 python3-pip sudo
+
+# Create the tvm user
+RUN groupadd -r tvm -g 3604 \
+ && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm \
+ && usermod -aG sudo tvm \
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER tvm
+WORKDIR /home/tvm
+
+COPY --from=tvm-devel /home/tvm/tvm/python/dist /home/tvm/dist
+RUN pip3 install /home/tvm/dist/*whl
