@@ -20,6 +20,13 @@ minimal:
 		-f Dockerfile.minimal \
 		.
 
+rpc:
+	docker build \
+		-t tvm-rpc \
+		--progress=plain \
+		-f Dockerfile.rpc \
+		.
+
 run:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \

@@ -1,0 +1,28 @@
+FROM tvm-devel
+
+FROM ubuntu
+RUN apt-get dist-upgrade -y \
+ && apt update -y \
+ && apt upgrade -y
+
+# Create the tvm user
+RUN groupadd -r tvm -g 3604 \
+ && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm \
+ && usermod -aG sudo tvm \
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER tvm
+WORKDIR /home/tvm
+
+RUN mkdir tvm; mkdir tvm/lib
+COPY --from=tvm-devel /home/tvm/tvm/build/tvm_rpc tvm/tvm_rpc
+COPY --from=tvm-devel /home/tvm/tvm/build/libtvm_runtime.so /home/tvm/tvm/lib/libtvm_runtime.so
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libstdc++.so.6 /home/tvm/tvm/lib/libstdc++.so.6
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libgcc_s.so.1 /home/tvm/tvm/lib/libgcc_s.so.1
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libpthread.so.0 /home/tvm/tvm/lib/libpthread.so.0
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libc.so.6 /home/tvm/tvm/lib/libc.so.6
+COPY --from=tvm-devel /lib64/ld-linux-x86-64.so.2 /home/tvm/tvm/lib/ld-linux-x86-64.so.2
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libdl.so.2 /home/tvm/tvm/lib/libdl.so.2
+COPY --from=tvm-devel /lib/x86_64-linux-gnu/libm.so.6 /home/tvm/tvm/lib/libm.so.6
+
+ENV LD_LIBRARY_PATH=/home/tvm/tvm/lib
