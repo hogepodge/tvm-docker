@@ -1,15 +1,10 @@
 FROM tvm-devel
 
 FROM ubuntu
-RUN apt-get dist-upgrade -y \
- && apt update -y \
- && apt upgrade -y
 
 # Create the tvm user
 RUN groupadd -r tvm -g 3604 \
- && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm \
- && usermod -aG sudo tvm \
- && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+ && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm 
 
 USER tvm
 WORKDIR /home/tvm
