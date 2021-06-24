@@ -25,6 +25,7 @@ rpc:
 		-t tvm-rpc \
 		--progress=plain \
 		-f Dockerfile.rpc \
+		--no-cache \
 		.
 
 run:

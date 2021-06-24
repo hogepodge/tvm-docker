@@ -2,7 +2,7 @@
 # For every subdirectory, enter that directory
 # and run a standard set of installation commands
 # pass a list of subdirectories to process
-set -x
+set -xe
 
 readarray -td: pipeline <<< $1; declare -p pipeline
  

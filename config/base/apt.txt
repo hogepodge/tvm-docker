@@ -17,5 +17,3 @@ libedit-dev
 libxml2-dev
 llvm
 
-# make the tvm user sudo
-sudo

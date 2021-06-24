@@ -23,6 +23,9 @@ ADD build.sh build.sh
 ADD config config
 ADD build build
 
+# install sudo and don't fail
+RUN yes O | apt install -y sudo
+
 # Create the tvm user
 RUN groupadd -r tvm -g 3604 \
  && useradd -u 3604 -r -g tvm -m -c "TVM user" -s /bin/bash tvm \
