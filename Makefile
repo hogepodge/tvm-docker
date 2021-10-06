@@ -56,7 +56,7 @@ sphinx-serve:
 	docker exec \
 		-d \
 		tvm_devel \
-		bash -c "cd tvm/docs ; sphinx-serve"
+		bash -c "cd tvm/docs/_staging ; sphinx-serve"
 
 docs:
 	docker exec \
