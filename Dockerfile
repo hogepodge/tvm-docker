@@ -1,13 +1,14 @@
-FROM ubuntu:latest
+FROM nvidia/cuda:11.4.2-devel-ubuntu20.04
 
 # The pipeline is a colon separated ordered list
-ARG CONFIG_PIPELINE=base:static:devel
-ARG BUILD_PIPELINE=tvm:python:wheels:docs
+ARG CONFIG_PIPELINE=base:devel
+ARG BUILD_PIPELINE=tvm:python
 
 USER root
 
 # Make apt non-interactive to keep installation from being blocked
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}"
 
 # Bring the image up to date
 RUN apt-get dist-upgrade -y \

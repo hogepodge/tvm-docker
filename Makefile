@@ -32,6 +32,7 @@ run:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \
 	docker run \
+	        --gpus all \
 		-v $(HOME)/.ssh:/home/tvm/.ssh:ro \
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-e GIT_USERNAME \

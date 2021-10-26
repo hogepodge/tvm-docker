@@ -17,3 +17,7 @@ libedit-dev
 libxml2-dev
 llvm
 
+# docs and cuda
+libgl1-mesa-glx
+libglib2.0-0
+
