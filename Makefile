@@ -1,40 +1,56 @@
 SHELL := /bin/bash
+host-ubuntu:
+	docker build . \
+		-t tvm-host-ubuntu \
+		--progress=plain \
+		-f docker/host/ubuntu/Dockerfile.host-ubuntu; \
+	docker tag tvm-host-ubuntu tvm-host
 
-tvm-devel:
-	docker build \
+host-cuda:
+	docker build . \
+		-t tvm-host-cuda \
+		--progress=plain \
+		-f docker/host/cuda/Dockerfile.host-cuda; \
+	docker tag tvm-host-cuda tvm-host
+
+dependencies:
+	docker build . \
+		-t tvm-dependencies \
+		--progress=plain \
+		-f docker/dependencies/Dockerfile.dependencies
+
+build: dependencies
+	docker build . \
+		-t tvm-build \
+		--progress=plain \
+		-f docker/build/Dockerfile.build
+
+user: build
+	docker build . \
+		-t tvm-user \
+		--progress=plain \
+		-f docker/user/Dockerfile.user
+
+devel: build
+	docker build . \
 		-t tvm-devel \
 		--progress=plain \
-		.
+		-f docker/devel/Dockerfile.devel
 
-devel-nocache:
-	docker build \
-		-t tvm-devel \
-		--progress=plain \
-		--no-cache \
-		.
-
-minimal:
-	docker build \
-		-t tvm-minimal \
-		--progress=plain \
-		-f Dockerfile.minimal \
-		.
-
-rpc:
+rpc: build
 	docker build \
 		-t tvm-rpc \
 		--progress=plain \
-		-f Dockerfile.rpc \
-		--no-cache \
+		-f docker/rpc/Dockerfile.rpc \
 		.
 
-run:
+run-devel:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \
 	docker run \
-	        --gpus all \
 		-v $(HOME)/.ssh:/home/tvm/.ssh:ro \
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
+		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
         -e GIT_EMAIL \
 		-e GITHUB_USERNAME \
@@ -43,15 +59,27 @@ run:
 		--name tvm_devel \
 		tvm-devel \
 		sleep infinity
-
 #		-v $(CURDIR)/setup:/home/tvm/.setup:ro \
+#		--gpus all \
 
-shell:
+stop-devel:
+	docker stop tvm_devel
+
+start-devel:
+	docker start tvm_devel
+
+shell-devel:
 	docker exec \
 		-it \
 		-e GITHUB_USERNAME \
 		tvm_devel \
 		bash
+
+rm-devel:
+	docker stop tvm_devel; \
+	docker rm tvm_devel;
+
+		.
 
 sphinx-serve:
 	docker exec \
@@ -69,11 +97,6 @@ tvm:
 		tvm_devel \
 		bash -c "cd tvm/build; make -j 8"
 
-stop:
-	docker stop tvm_devel
-
-start:
-	docker start tvm_devel
 
 clean:
 	docker stop tvm_devel

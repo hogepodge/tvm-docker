@@ -1,28 +1,10 @@
-FROM nvidia/cuda:11.4.2-devel-ubuntu20.04
-
-# The pipeline is a colon separated ordered list
-ARG CONFIG_PIPELINE=base:devel
-ARG BUILD_PIPELINE=tvm:python
+FROM tvm-dependencies
 
 USER root
 
 # Make apt non-interactive to keep installation from being blocked
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}"
-
-# Bring the image up to date
-RUN apt-get dist-upgrade -y \
- && apt update -y \
- && apt upgrade -y \
- && apt install -y git
-
-# The pipeline scripts
-ADD config.sh config.sh
-ADD build.sh build.sh
-
-# The pipeline directories
-ADD config config
-ADD build build
 
 # install sudo and don't fail
 RUN yes O | apt install -y sudo
@@ -33,7 +15,9 @@ RUN groupadd -r tvm -g 3604 \
  && usermod -aG sudo tvm \
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN ./config.sh $CONFIG_PIPELINE
+ADD ./docker/build/*cmake .
+RUN cp ${HOST_IMAGE}.cmake /home/tvm/cmake.txt
+RUN chown tvm:tvm /home/tvm/cmake.txt
 
 USER tvm
 
@@ -52,7 +36,8 @@ RUN cd /home/tvm/tvm \
 ENV THREADS=8
 
 # Run the custom build pipeline
-RUN ./build.sh $BUILD_PIPELINE
+ADD docker/build/build_tvm.sh build_tvm.sh
+RUN ./build_tvm.sh
 
 # Set up the working space
 WORKDIR /home/tvm

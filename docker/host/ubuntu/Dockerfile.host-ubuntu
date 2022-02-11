@@ -1,0 +1,14 @@
+FROM ubuntu:latest
+
+USER root
+
+# Make apt non-interactive to keep installation from being blocked
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/:${LD_LIBRARY_PATH}"
+
+# Bring the image up to date
+RUN apt-get dist-upgrade -y \
+ && apt update -y \
+ && apt upgrade -y
+
+ENV HOST_IMAGE=ubuntu

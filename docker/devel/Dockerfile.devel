@@ -1,0 +1,9 @@
+FROM tvm-build
+
+RUN sudo apt install -y vim
+
+USER tvm
+WORKDIR /home/tvm
+
+ADD docker/devel/setup.bashrc /home/tvm/.setup.bashrc
+RUN echo "source .setup.bashrc" >> /home/tvm/.bashrc

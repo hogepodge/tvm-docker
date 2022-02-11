@@ -1,10 +1,14 @@
-FROM tvm-devel
+FROM tvm-build
 
-FROM ubuntu
+RUN cd /home/tvm/tvm/python \
+ && python3 setup.py install --user \
+ && python3 setup.py bdist_wheel
+
+FROM tvm-host
 RUN apt-get dist-upgrade -y \
  && apt update -y \
  && apt upgrade -y \
- && apt install -y python3 python3-pip sudo
+ && apt install -y python3 python3-pip sudo llvm
 
 # Create the tvm user
 RUN groupadd -r tvm -g 3604 \
@@ -15,5 +19,5 @@ RUN groupadd -r tvm -g 3604 \
 USER tvm
 WORKDIR /home/tvm
 
-COPY --from=tvm-devel /home/tvm/tvm/python/dist /home/tvm/dist
-RUN pip3 install /home/tvm/dist/*whl
+COPY --from=0 /home/tvm/tvm/python/dist /home/tvm/dist
+RUN pip3 install /home/tvm/dist/*whl \
