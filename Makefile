@@ -48,19 +48,34 @@ run-devel:
 	GIT_USERNAME="$(shell git config user.name)" \
 	GIT_EMAIL="$(shell git config user.email)" \
 	docker run \
-		-v $(HOME)/.ssh:/home/tvm/.ssh:ro \
+		-v $(HOME)/.ssh:/home/tvm/.user_ssh:ro \
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
-        -e GIT_EMAIL \
+        	-e GIT_EMAIL \
 		-e GITHUB_USERNAME \
 		-p 8081:8081 \
 		-d \
 		--name tvm_devel \
 		tvm-devel \
 		sleep infinity
-#		-v $(CURDIR)/setup:/home/tvm/.setup:ro \
-#		--gpus all \
+
+gpu-devel:
+	GIT_USERNAME="$(shell git config user.name)" \
+	GIT_EMAIL="$(shell git config user.email)" \
+	docker run \
+		-v $(HOME)/.ssh:/home/tvm/.user_ssh:ro \
+		-v $(HOME)/.vim:/home/tvm/.vim:ro \
+		-v $(CURDIR)/workspace:/home/tvm/workspace \
+		-e GIT_USERNAME \
+        	-e GIT_EMAIL \
+		-e GITHUB_USERNAME \
+		-p 8081:8081 \
+		-d \
+		--name tvm_devel \
+		tvm-devel \
+		--gpus all \
+		sleep infinity
 
 stop-devel:
 	docker stop tvm_devel
