@@ -79,8 +79,6 @@ rm-devel:
 	docker stop tvm_devel; \
 	docker rm tvm_devel;
 
-		.
-
 sphinx-serve:
 	docker exec \
 		-d \
@@ -96,7 +94,6 @@ tvm:
 	docker exec \
 		tvm_devel \
 		bash -c "cd tvm/build; make -j 8"
-
 
 clean:
 	docker stop tvm_devel
