@@ -15,7 +15,7 @@ RUN groupadd -r tvm -g 3604 \
  && usermod -aG sudo tvm \
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-ADD ./docker/build/*cmake .
+ADD ./docker/build/*cmake ./
 RUN cp ${HOST_IMAGE}.cmake /home/tvm/cmake.txt
 RUN chown tvm:tvm /home/tvm/cmake.txt
 

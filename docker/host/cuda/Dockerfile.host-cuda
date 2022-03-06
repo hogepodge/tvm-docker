@@ -9,5 +9,7 @@ RUN apt-get dist-upgrade -y \
  && apt update -y \
  && apt upgrade -y
 
+RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/libcuda.so.1
+
 ENV HOST_IMAGE=cuda
 
