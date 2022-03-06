@@ -52,7 +52,7 @@ run-devel:
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
-        	-e GIT_EMAIL \
+      	-e GIT_EMAIL \
 		-e GITHUB_USERNAME \
 		-p 8081:8081 \
 		-d \
@@ -68,7 +68,7 @@ gpu-devel:
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
-        	-e GIT_EMAIL \
+       	-e GIT_EMAIL \
 		-e GITHUB_USERNAME \
 		-p 8081:8081 \
 		-d \

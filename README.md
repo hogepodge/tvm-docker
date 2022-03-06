@@ -53,10 +53,11 @@ to the `.bashrc` that will use some environment variables on starting a shell
 to point to your GitHub user. With this container built, there are a number of
 additional `make` commands to start shells, build docs, and carry out other tasks
 
-#### `make run-devel`
+#### `make run-devel` or `make gpu-devel`
 
 Launches a development environment as daemon (calling `sleep infinity`), passing through
-keys, GitHub information, Vim configuration, opening up a port for docs development.
+keys, GitHub information, Vim configuration, opening up a port for docs development. Use
+the GPU version if you want to enable access to GPUs.
 
 #### `make stop-devel`
 
