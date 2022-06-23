@@ -1,7 +1,7 @@
 cpplint
 pylint==2.4.4
 mypy
-black
+black==20.8b1
 matplotlib
 Image
 Pillow<7
@@ -32,18 +32,18 @@ flatbuffers
 scikit-image
 opencv-python
 cffi
-h5py<3.0
+h5py==2.10.0
 orderedset
 cloudpickle
-synr
-sphinx
+synr==0.6.0
+sphinx==4.2.0
 sphinx-gallery==0.4.0
 autodocsumm
 sphinx_rtd_theme
 sphinx_autodoc_annotation
 sphinx-serve
 commonmark>=0.7.3
-docutils>=0.11
+docutils>-0.11,<0.17
 protobuf
 onnx
 onnxruntime
@@ -53,3 +53,4 @@ torchvision==0.8.1
 west
 progressbar
 tlcpack_sphinx_addon
+matplotlib
