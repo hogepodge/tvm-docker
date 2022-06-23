@@ -52,7 +52,7 @@ run-devel:
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
-        	-e GIT_EMAIL \
+      	-e GIT_EMAIL \
 		-e GITHUB_USERNAME \
 		-p 8081:8081 \
 		-d \
@@ -68,7 +68,7 @@ gpu-devel:
 		-v $(HOME)/.vim:/home/tvm/.vim:ro \
 		-v $(CURDIR)/workspace:/home/tvm/workspace \
 		-e GIT_USERNAME \
-        	-e GIT_EMAIL \
+       	-e GIT_EMAIL \
 		-e GITHUB_USERNAME \
 		-p 8081:8081 \
 		-d \
@@ -94,8 +94,6 @@ rm-devel:
 	docker stop tvm_devel; \
 	docker rm tvm_devel;
 
-		.
-
 sphinx-serve:
 	docker exec \
 		-d \
@@ -111,7 +109,6 @@ tvm:
 	docker exec \
 		tvm_devel \
 		bash -c "cd tvm/build; make -j 8"
-
 
 clean:
 	docker stop tvm_devel
